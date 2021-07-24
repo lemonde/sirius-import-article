@@ -11,6 +11,10 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
+<<<<<<< HEAD
+=======
+    "form-data": "^4.0.0",
+>>>>>>> eedc4e0... Initiate doc
     "graphql": "^15.5.1",
     "graphql-tag": "^2.12.5"
   }
