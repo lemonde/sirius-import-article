@@ -1,0 +1,17 @@
+{
+  "name": "sirius-import-article",
+  "version": "1.0.0",
+  "description": "Step-by-step tutorial on how to import an article into Sirius app with the GraphQL API",
+  "main": "index.js",
+  "repository": "git@github.com:smooth-code/sirius-import-article.git",
+  "author": "Jeremy Sfez <jeremy@smooth-code.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "graphql": "^15.5.1",
+    "graphql-tag": "^2.12.5"
+  }
+}

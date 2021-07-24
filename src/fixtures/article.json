@@ -1,0 +1,42 @@
+{
+  "type_of": "article",
+  "id": 768225,
+  "title": "React source code visible 😲",
+  "description": "Do you know that when you deploy your React application which is created using 𝗰𝗿𝗲𝗮𝘁𝗲-𝗿𝗲𝗮𝗰𝘁-𝗮𝗽𝗽 or...",
+  "readable_publish_date": "Jul 22",
+  "slug": "react-souce-code-visible-4e57",
+  "path": "/dhanushxeno/react-souce-code-visible-4e57",
+  "url": "https://dev.to/dhanushxeno/react-souce-code-visible-4e57",
+  "comments_count": 4,
+  "public_reactions_count": 36,
+  "collection_id": null,
+  "published_timestamp": "2021-07-22T05:35:07Z",
+  "positive_reactions_count": 36,
+  "cover_image": "https://res.cloudinary.com/practicaldev/image/fetch/s--vvaIehy5--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/3fg8ztmywdcuossl75ch.png",
+  "social_image": "https://res.cloudinary.com/practicaldev/image/fetch/s--3VDsGqph--/c_imagga_scale,f_auto,fl_progressive,h_500,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/3fg8ztmywdcuossl75ch.png",
+  "canonical_url": "https://dev.to/dhanushxeno/react-souce-code-visible-4e57",
+  "created_at": "2021-07-22T05:35:07Z",
+  "edited_at": "2021-07-22T11:48:08Z",
+  "crossposted_at": null,
+  "published_at": "2021-07-22T05:35:07Z",
+  "last_comment_at": "2021-07-22T14:17:47Z",
+  "reading_time_minutes": 1,
+  "tag_list": "react, showdev, discuss, javascript",
+  "tags": ["react", "showdev", "discuss", "javascript"],
+  "body_html": "\u003cp\u003eDo you know that when you deploy your React application which is created using 𝗰𝗿𝗲𝗮𝘁𝗲-𝗿𝗲𝗮𝗰𝘁-𝗮𝗽𝗽 or your own webpack configuration to a live website like Netlify, Vercel, Heroku etc, your entire source code is visible to everyone from the sources tab of the developer toolbar as shown in the screenshot of this post.\u003c/p\u003e\n\n\u003cp\u003e\u003ca href=\"https://res.cloudinary.com/practicaldev/image/fetch/s--W5nzR6xw--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/n3xhm6q97ld17hmc72zg.jpg\" class=\"article-body-image-wrapper\"\u003e\u003cimg src=\"https://res.cloudinary.com/practicaldev/image/fetch/s--W5nzR6xw--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/n3xhm6q97ld17hmc72zg.jpg\" alt=\"React source code\" loading=\"lazy\"\u003e\u003c/a\u003e\u003c/p\u003e\n\n\u003cp\u003eThis is not an issue with the 𝗰𝗿𝗲𝗮𝘁𝗲-𝗿𝗲𝗮𝗰𝘁-𝗮𝗽𝗽 but all of the source code is added because of the source map\u003c/p\u003e\n\n\u003cp\u003e😲😲😲\u003c/p\u003e\n\n\u003cp\u003eBut you definitely don't want everyone to see your entire source code If it's a private repository or you're working on a client project.\u003c/p\u003e\n\n\u003cp\u003eThere is an easy way to fix it.\u003c/p\u003e\n\n\u003cp\u003eCreate a file with the name .env in your project folder with the below code inside it\u003c/p\u003e\n\n\u003cp\u003e\u003ccode\u003eGENERATE_SOURCEMAP=false\u003c/code\u003e\u003c/p\u003e\n\n\u003cp\u003eso when you run 𝗻𝗽𝗺 𝗿𝘂𝗻 𝗯𝘂𝗶𝗹𝗱 or 𝘆𝗮𝗿𝗻 𝗿𝘂𝗻 𝗯𝘂𝗶𝗹𝗱 command from the terminal,\u003c/p\u003e\n\n\u003cp\u003eIt will generate a 𝗯𝘂𝗶𝗹𝗱 folder with minified files without a source map that you can deploy to the production.\u003c/p\u003e\n\n\u003cp\u003eConnect with me for more tech related information \u003ca href=\"https://twitter.com/Dhanush_Xen?s=09\"\u003eTwitter\u003c/a\u003e\u003c/p\u003e\n\n",
+  "body_markdown": "Do you know that when you deploy your React application which is created using 𝗰𝗿𝗲𝗮𝘁𝗲-𝗿𝗲𝗮𝗰𝘁-𝗮𝗽𝗽 or your own webpack configuration to a live website like Netlify, Vercel, Heroku etc, your entire source code is visible to everyone from the sources tab of the developer toolbar as shown in the screenshot of this post.\n\n![React source code](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/n3xhm6q97ld17hmc72zg.jpg)\n\nThis is not an issue with the 𝗰𝗿𝗲𝗮𝘁𝗲-𝗿𝗲𝗮𝗰𝘁-𝗮𝗽𝗽 but all of the source code is added because of the source map\n\n😲😲😲\n\nBut you definitely don't want everyone to see your entire source code If it's a private repository or you're working on a client project.\n\nThere is an easy way to fix it.\n\nCreate a file with the name .env in your project folder with the below code inside it\n\n\u003ccode\u003eGENERATE_SOURCEMAP=false\u003c/code\u003e\n\nso when you run 𝗻𝗽𝗺 𝗿𝘂𝗻 𝗯𝘂𝗶𝗹𝗱 or 𝘆𝗮𝗿𝗻 𝗿𝘂𝗻 𝗯𝘂𝗶𝗹𝗱 command from the terminal,\n\n\nIt will generate a 𝗯𝘂𝗶𝗹𝗱 folder with minified files without a source map that you can deploy to the production.\n\nConnect with me for more tech related information [Twitter](https://twitter.com/Dhanush_Xen?s=09)\n\n\n",
+  "user": {
+    "name": "DHANUSH N",
+    "username": "dhanushxeno",
+    "twitter_username": "Dhanush_Xen",
+    "github_username": "DHANUSHXENO",
+    "website_url": null,
+    "profile_image": "https://res.cloudinary.com/practicaldev/image/fetch/s--W8LjKZQ4--/c_fill,f_auto,fl_progressive,h_640,q_auto,w_640/https://dev-to-uploads.s3.amazonaws.com/uploads/user/profile_image/457133/efa1c349-2187-4733-9169-7f43d4b43a95.jpg",
+    "profile_image_90": "https://res.cloudinary.com/practicaldev/image/fetch/s--ZbqJvlws--/c_fill,f_auto,fl_progressive,h_90,q_auto,w_90/https://dev-to-uploads.s3.amazonaws.com/uploads/user/profile_image/457133/efa1c349-2187-4733-9169-7f43d4b43a95.jpg"
+  },
+  "flare_tag": {
+    "name": "showdev",
+    "bg_color_hex": "#091b47",
+    "text_color_hex": "#b2ffe1"
+  }
+}
