@@ -1,0 +1,41 @@
+<p>
+  Do you know that when you deploy your React application which is created using
+  𝗰𝗿𝗲𝗮𝘁𝗲-𝗿𝗲𝗮𝗰𝘁-𝗮𝗽𝗽 or your own webpack configuration to a live website like
+  Netlify, Vercel, Heroku etc, your entire source code is visible to everyone
+  from the sources tab of the developer toolbar as shown in the screenshot of
+  this post.
+</p>
+<p>
+  <a href="https://res.cloudinary.com/practicaldev/image/fetch/s--W5nzR6xw--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/n3xhm6q97ld17hmc72zg.jpg"
+    class="article-body-image-wrapper">
+    <img
+      src="https://res.cloudinary.com/practicaldev/image/fetch/s--W5nzR6xw--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/n3xhm6q97ld17hmc72zg.jpg"
+      alt="React source code" loading="lazy" />
+  </a>
+</p>
+<p>
+  This is not an issue with the 𝗰𝗿𝗲𝗮𝘁𝗲-𝗿𝗲𝗮𝗰𝘁-𝗮𝗽𝗽 but all of the source code is
+  added because of the source map
+</p>
+<p>😲😲😲</p>
+<p>
+  But you definitely don't want everyone to see your entire source code If it's
+  a private repository or you're working on a client project.
+</p>
+<p>There is an easy way to fix it.</p>
+<p>
+  Create a file with the name .env in your project folder with the below code
+  inside it
+</p>
+<p><code>GENERATE_SOURCEMAP=false</code></p>
+<p>
+  so when you run 𝗻𝗽𝗺 𝗿𝘂𝗻 𝗯𝘂𝗶𝗹𝗱 or 𝘆𝗮𝗿𝗻 𝗿𝘂𝗻 𝗯𝘂𝗶𝗹𝗱 command from the terminal,
+</p>
+<p>
+  It will generate a 𝗯𝘂𝗶𝗹𝗱 folder with minified files without a source map that
+  you can deploy to the production.
+</p>
+<p>
+  Co ect with me for more tech related information
+  <a href="https://twitter.com/Dhanush_Xen?s=09">Twitter</a>
+</p>
