@@ -26,10 +26,9 @@ async function downloadFile(url, filePath) {
     const dataStream = await axios({ url, responseType: "stream" })
     dataStream.data.pipe(writer)
     await finished(writer)
-    console.log("Image downloaded")
   } catch (error) {
     console.error("Download error", error)
   }
 }
 
-exports = { downloadFile, getMimeType }
+exports.downloadFile = downloadFile

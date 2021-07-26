@@ -7,15 +7,30 @@
   "author": "Jeremy Sfez <jeremy@smooth-code.com>",
   "license": "MIT",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "lint": "eslint --quiet ."
   },
   "dependencies": {
     "axios": "^0.21.1",
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-plugin-prettier": "^3.4.0",
+>>>>>>> e1c2b5e... init 2
     "form-data": "^4.0.0",
 >>>>>>> eedc4e0... Initiate doc
     "graphql": "^15.5.1",
     "graphql-tag": "^2.12.5"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.14.8",
+    "@babel/eslint-parser": "^7.14.7",
+    "eslint": "^7.31.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.24.0"
   }
 }

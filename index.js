@@ -20,52 +20,42 @@ const createOrUpdateImage = gql`
   }
 `
 
-function getMimeType(str) {
-  const fileExtention = /(?:\.([^.]+))?$/.exec(str)[1]
-
-  switch (fileExtention.trim()) {
-    case "jpg":
-    case "jpeg":
-      return "image/jpeg"
-    case "png":
-      return "image/png"
-    default:
-      throw new Error(`Unknowed extention type: "${extention}".`)
-  }
+function getNameFromUrl(str) {
+  const imageName 
 }
 
-function getImageName(str) {
-  const imageName = /([^/]+\.[^.]+)?$/.exec(str)[1]
-  return imageName
-}
-
-async function uploadImage({ url, mediaTypeId }) {
-  try {
-    const imageName = getImageName(url)
-    const filePath = path.join(DOWNLOAD_FOLDER, imageName)
-    const mimetype = getMimeType(filePath)
-    // await downloadFile(url, filePath)
-
-    // console.log(Object.keys(file))
-    const form = new FormData()
-    form.append(
-      "operations",
-      JSON.stringify({
-        query: print(createOrUpdateImage),
-        variables: { mediaTypeId: PHOTO_MEDIA_TYPE_ID, file: null },
-      })
-    )
-    form.append("map", JSON.stringify({ 1: ["variables.file"] }))
-    form.append("1", fs.createReadStream(filePath))
-
-    const { data } = await axios.post(API_ENDPOINT, form, {
-      headers: {
-        ...form.getHeaders(),
-        Authorization: `Bearer ${BEARER_TOKEN}`,
-      },
+async function uploadImage() {
+  const form = new FormData()
+  form.append(
+    "operations",
+    JSON.stringify({
+      query: print(createOrUpdateImage),
+      variables: { mediaTypeId: PHOTO_MEDIA_TYPE_ID, file: null },
     })
+  )
+  form.append("map", JSON.stringify({ 1: ["variables.file"] }))
+  form.append("1", fs.createReadStream(filePath))
 
-    // fs.unlinkSync(filePath)
+  await axios.post(API_ENDPOINT, form, {
+    headers: {
+      ...form.getHeaders(),
+      Authorization: `Bearer ${BEARER_TOKEN}`,
+    },
+  })
+}
+
+async function uploadImageFromUrl(url) {
+  try {
+    const localImagePath = path.join(DOWNLOAD_FOLDER, getNameFromUrl(url))
+
+    await downloadFile({ url, localImagePath })
+    console.log("Image downloaded")
+
+    await uploadImageFromUrl()
+    console.log("Image sent to Sirius")
+
+    fs.unlinkSync(localImagePath)
+    console.log("Local copy deleted")
   } catch (error) {
     if (error.response?.data?.errors?.length) {
       console.log(JSON.stringify(error.response.data.errors, null, 2))
@@ -76,7 +66,7 @@ async function uploadImage({ url, mediaTypeId }) {
 }
 
 async function main() {
-  await uploadImage({
+  await uploadImageFromUrl({
     url: article.cover_image,
     mediaTypeId: PHOTO_MEDIA_TYPE_ID,
   })
