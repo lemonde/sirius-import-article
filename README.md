@@ -7,9 +7,10 @@ Step-by-step tutorial on how to import an article into Sirius app with the Graph
 - [Playground](#playground)
 - [Data source](#data-source)
 - [Data correspondence](#data-correspondence)
-- [Prerequisites](#prerequisites)
+- [Get required data](#get-required-data)
   - [Get the "Article" layout id](#get-the-factuel-editorial-type-id)
   - [Get the "Factuel" editorial type id](#get-the-factuel-editorial-type-id)
+- [Linked resources](#linked-resources)
   - [Source creation](#source-creation)
   - [Tags creation](#tags-creation)
   - [Author creation](#author-creation)
@@ -85,18 +86,11 @@ Some data from DEV.to API can't be imported in Sirius API.
 
 </details>
 
-## Prerequisites
+## Get required data
 
 To create an [article](https://lemonde.sirius.press/developer/docs/graphql-api/schema/#article) on Sirius API we use the [createArticle](https://lemonde.sirius.press/developer/docs/graphql-api/schema/#mutation) mutation with a [createArticleInput](https://lemonde.sirius.press/developer/docs/graphql-api/schema/#createarticleinput) param.
 
-First, we have to create or get linked resources :
-
-- Get the required fields data : the layout and editorial type ids
-- Create new linked resources:
-  - The "source"
-  - The "tags"
-  - The "author"
-- Import the images
+The minimal required fields to create an article are [article layout](https://lemonde.sirius.press/developer/docs/graphql-api/schema/#articlelayout) id (`layoutId`) and [editorial type](https://lemonde.sirius.press/developer/docs/graphql-api/schema/#editorialtype) id (`editorialTypeId`).
 
 ### Get the "Article" layout id
 
@@ -128,7 +122,7 @@ The "article" `layoutId` : _bG9jYWw6TGF5b3V0OjE=_
 
 ### Get the "Factuel" editorial type id
 
-There is a admin page for the editorial types. The editorial type id are displayed on their dedicated page.
+There is an editorial types admin page where we can find the "Factuel" id.
 
 - Go to [editorial types admin page](https://lemonde.sirius.press.sirius.press/cms-client/admin/article/editorial-types).
 - Click on "Factuel".
@@ -139,6 +133,8 @@ There is a admin page for the editorial types. The editorial type id are display
 The `editorialTypeId` is : _bG9jYWw6RWRpdG9yaWFsVHlwZToyMQ==_
 
 ps. we could have use the [editorial type](https://lemonde.sirius.press/developer/docs/graphql-api/schema/#editorialtype) query to retrieve the same id.
+
+## Linked resources
 
 ### Source creation
 
@@ -207,31 +203,86 @@ mutation CreateAuthor {
 
 ### Images import
 
-In the article JSON we can read the links of these images :
+In the article JSON we can found these images links :
 
 - The cover image
-- An image in the article body
+- An image contains in the article body
 - The user profile image with 90px height
 - The user profile image with 640px height
 
 We will import the three firsts and ignore the last one.
 
-#### Import cover image
+#### Import articles meta images
 
-```json
-{
-  "cover_image": "https://res.cloudinary.com/practicaldev/image/fetch/s--vvaIehy5--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/3fg8ztmywdcuossl75ch.png"
+The cover image is an "illustration". Execute the following query to find "illustration" `mediaTypeId`
+
+```graphql
+query MediaType {
+  mediaType(key: "illustration") {
+    id
+    name
+  }
 }
 ```
 
-We need the "photo" media type :
+The `mediaTypeId` is: _bG9jYWw6TWVkaWE6Mw==_.
 
-- Go to [media types admin page](https://local.sirius.press/cms-client/admin/medias)
-- Click on "Photo"
-- Copy [Global ID](https://lemonde.sirius.press/developer/docs/guides/global-id/): _bG9jYWw6TWVkaWE6Mg==_
+ps. It could have been found in the [media admin page](https://local.sirius.press/cms-client/admin/medias)
+
+We execute following javascript code to import the images :
 
 ```javascript
+const { uploadImageFromUrl } = require("./src/image-upload")
+const article = require("./src/fixtures/article.json")
 
+await uploadImageFromUrl({
+  url: article.cover_image,
+  mediaTypeId: "bG9jYWw6TWVkaWE6Mw==_", // "Illustration" media type id
+})
+
+await uploadImageFromUrl({
+  url: article.user.profile_image_90,
+  mediaTypeId: "bG9jYWw6TWVkaWE6Mg==", // "Photo" media type id
+})
+```
+
+The image id are :
+
+- Cover image id : **bG9jYWw6SW1hZ2U6NQ==**
+- Profile image id : **bG9jYWw6SW1hZ2U6NQ==**
+
+We now need to get all images from article content :
+
+```javascript
+const { uploadImageFromUrl } = require("./src/image-upload")
+const article = require("./src/fixtures/article.json")
+
+await uploadImageFromUrl({
+  url: article.cover_image,
+  mediaTypeId: "bG9jYWw6TWVkaWE6Mw==_", // "Illustration" media type id
+})
+
+await uploadImageFromUrl({
+  url: article.user.profile_image_90,
+  mediaTypeId: "bG9jYWw6TWVkaWE6Mg==", // "Photo" media type id
+})
+```
+
+#### Import articles content images
+
+```javascript
+const { uploadImageFromUrl } = require("./src/image-upload")
+const article = require("./src/fixtures/article.json")
+
+await uploadImageFromUrl({
+  url: article.cover_image,
+  mediaTypeId: "bG9jYWw6TWVkaWE6Mw==_", // "Illustration" media type id
+})
+
+await uploadImageFromUrl({
+  url: article.user.profile_image_90,
+  mediaTypeId: "bG9jYWw6TWVkaWE6Mg==", // "Photo" media type id
+})
 ```
 
 ## ??

@@ -6,8 +6,9 @@
   "repository": "git@github.com:smooth-code/sirius-import-article.git",
   "author": "Jeremy Sfez <jeremy@smooth-code.com>",
   "license": "MIT",
+  "type": "module",
   "scripts": {
-    "start": "node index.js",
+    "start": "node --no-warnings --experimental-modules --experimental-specifier-resolution=node src/index.js",
     "lint": "eslint --quiet ."
   },
   "dependencies": {
@@ -16,7 +17,13 @@
     "eslint-plugin-prettier": "^3.4.0",
     "form-data": "^4.0.0",
     "graphql": "^15.5.1",
-    "graphql-tag": "^2.12.5"
+    "graphql-tag": "^2.12.5",
+    "hast-util-to-html": "^8.0.1",
+    "rehype-parse": "^7.0.1",
+    "unified": "^10.0.1",
+    "unist-util-map": "^3.0.0",
+    "unist-util-visit": "^3.1.0",
+    "unist-util-visit-children": "^2.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.14.8",

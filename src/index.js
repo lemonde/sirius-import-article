@@ -1,65 +1,35 @@
-const fs = require("fs")
-const config = config("./config")
-const { downloadFile, getMimeType } = require("./utils")
-const { print } = require("graphql")
-const gql = require("graphql-tag")
-const axios = require("axios")
-const article = require("./article")
-
-const createOrUpdateImage = gql`
-  mutation ($input: CreateOrUpdateImageInput!) {
-    createOrUpdateImage(input: $input) {
-      id
-    }
-  }
-`
-
-async function uploadImage({ url, mediaTypeId }) {
-  try {
-    const imageName = getImageName(url)
-    const filePath = path.join(config.DOWNLOAD_FOLDER, imageName)
-    const mimetype = getMimeType(filePath)
-
-    console.log("filePath", filePath)
-    // await downloadFile(url, filePath)
-
-    const file = fs.createReadStream(filePath)
-    console.log(Object.keys(file))
-
-    const { data } = await axios.post(
-      config.API_ENDPOINT,
-      {
-        query: print(createOrUpdateImage),
-        variables: {
-          input: {
-            file: (async () => ({
-              createReadStream: () => file,
-              stream: file,
-              filename: imageName,
-              mimetype,
-            }))(),
-            mediaTypeId,
-          },
-        },
-      },
-      { headers: { Authorization: `Bearer ${config.BEARER_TOKEN}` } }
-    )
-
-    console.log(data)
-
-    // fs.unlinkSync(filePath)
-  } catch (error) {
-    console.error("Upload image error", error)
-  }
-}
+/* eslint-disable no-console */
+import { uploadImageFromUrl } from "./image-upload"
+import article from "./fixtures/article"
+import { getImageUrls } from "./get-image-urls"
 
 async function main() {
-  await uploadImage({
-    url: article.cover_image,
+  try {
+    console.log("1. Import cover image")
+    await uploadImageFromUrl({
+      url: article.cover_image,
+      mediaTypeId: "bG9jYWw6TWVkaWE6Mw==_", // "Illustration" media type id
+    })
 
-    // Photo media type id
-    mediaTypeId: "bG9jYWw6TWVkaWE6Mg==",
-  })
+    console.log("2. Import user profile image")
+    await uploadImageFromUrl({
+      url: article.user.profile_image_90,
+      mediaTypeId: "bG9jYWw6TWVkaWE6Mg==", // "Photo" media type id
+    })
+
+    console.log("3. Import artice content images")
+    await Promise.all(
+      getImageUrls(article.body_html).map(async (url) =>
+        uploadImageFromUrl({ url, mediaTypeId: "bG9jYWw6TWVkaWE6Mg==" })
+      )
+    )
+  } catch (error) {
+    if (error.response?.data?.errors?.length) {
+      console.log(JSON.stringify(error.response.data.errors, null, 2))
+    } else {
+      console.error("Upload image error", error)
+    }
+  }
 }
 
 main()
