@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import article from "./fixtures/article"
+import article from "./fixtures/article" assert { type: "json" }
 import { uploadImageFromUrl, getImageUrls } from "./import-image"
 import { createArticle, getArticleBlocks } from "./create-article"
 import { htmlToHast } from "./html-to-hast"
@@ -37,11 +37,11 @@ async function main() {
     })
 
     const hast = htmlToHast(article.body_html)
-    const imageIds = await importContentImages(hast)
+    //const imageIds = await importContentImages(hast)
     const blocks = getArticleBlocks({ hast, imageIds })
     await createArticle(article, blocks)
   } catch (error) {
-    console.error("Article creation error", error.response.data.errors)
+    console.error("Article creation error", error)
   }
 }
 
