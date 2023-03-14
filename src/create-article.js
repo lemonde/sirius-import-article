@@ -15,9 +15,9 @@ export async function createArticle(article, blocks) {
         }`,
       variables: {
         createArticleInput: {
-          layoutId: "bG9jYWw6TGF5b3V0OjE=",
-          editorialTypeId: "bG9jYWw6RWRpdG9yaWFsVHlwZToyMQ==",
-          sourcings: [{ sourceId: "bG9jYWw6U291cmNlOjE4" }],
+          layoutId: "bG9jYWw6TGF5b3V0OjE",
+          editorialTypeId: "bG9jYWw6RWRpdG9yaWFsVHlwZToyMQ",
+          sourcings: [{ sourceId: "bG9jYWw6U291cmNlOjIx" }],
           title: article.title,
           chapo: article.description,
           tagIds: [

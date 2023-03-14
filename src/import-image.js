@@ -74,13 +74,6 @@ export async function uploadImageFromUrl({ url, mediaTypeId, log }) {
 
 export function getImageUrls(hast) {
   const imageSources = []
-
-  // map(hast, (node) => {
-  //   if (node.tagName === "img") {
-  //     imageSources.push(node.properties.src)
-  //   }
-  // })
-
   visit(hast, (node) => {
     if (node.tagName === "img") {
       imageSources.push(node.properties.src)
