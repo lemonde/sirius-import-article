@@ -37,7 +37,7 @@ async function main() {
     })
 
     const hast = htmlToHast(article.body_html)
-    //const imageIds = await importContentImages(hast)
+    const imageIds = await importContentImages(hast)
     const blocks = getArticleBlocks({ hast, imageIds })
     await createArticle(article, blocks)
   } catch (error) {
