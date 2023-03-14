@@ -19,18 +19,18 @@ Step-by-step tutorial on how to import an article into Sirius app with the Graph
 
 ## Playground
 
-GraphQL queries and mutations will be execute in Sirius GraphQL playground:
+GraphQL queries and mutations will be executed in Sirius GraphQL playground:
 ```
 https://*.sirius.press/api/public/graphql
 ```
 
-> It requires to be logged in with a Sirius account that have `admin:access:prod` permission.
+> It requires to be logged in with a Sirius account that has `admin:access:prod` permission.
 
 ## Source article
 
 In this tutorial, we will import [this article](https://dev.to/dhanushxeno/react-souce-code-visible-4e57) from [DEV.to API](https://docs.forem.com/api).
 
-We curl the API and store the result in [article.json](article.json) file.
+We curl the API and store the result of [article.json](article.json) file.
 
 ```shell
 curl https://dev.to/api/articles/768225 > article.json
@@ -88,7 +88,7 @@ Some data from DEV.to API can't be imported in Sirius API.
 
 ## Required data
 
-To create an `article` on Sirius API we use the `createArticle` mutation with a `createArticleInput` param. (browse "Docs" on your graphql playground)
+To create an `article` on Sirius API we use the `createArticle` mutation with a `createArticleInput` param. (browse "Docs" on your graphQL playground)
 
 The minimal required fields to create an article are article layout id (`layoutId`) and editorial type id (`editorialTypeId`).
 
@@ -129,13 +129,13 @@ There is an editorial types admin page where we can find the "Factuel" id.
 
 - Go to editorial types admin page : `/cms-client/admin/article/editorial-types`
 - Click on "Factuel".
-- At the bottom-end of page, copy the [Global ID](https://developer.sirius.press/docs/guides/global-id/). This global id is the research `editorialTypeId`
+- At the bottom end of the page copy the [Global ID](https://developer.sirius.press/docs/guides/global-id/). This global id is the research `editorialTypeId`
 
 ![Edition type id](./src/images/edition-type-global-id.png)
 
 The `editorialTypeId` is : `bG9jYWw6RWRpdG9yaWFsVHlwZToyMQ`
 
-> we could have use the `editorialType` query to retrieve the same id.
+> we could use the `editorialType` query to retrieve the same id.
 
 ## Linked resources
 
@@ -166,9 +166,9 @@ mutation CreateRubric {
 }
 ```
 
-for each tags, for this exemple: "react", "showdev", "discuss"
+for each tag, for this example: "react", "showdev", "discuss"
 
-The tags ids are :
+Tags ids are :
 
 - "javascript": `bG9jYWw6VGFnOjM5MTYy`
 - "react": `bG9jYWw6VGFnOjM5MTYz`
@@ -177,7 +177,7 @@ The tags ids are :
 
 ### Author creation
 
-Execute the `createAuthor` mutation to create new author named "DHANUSH N".
+Execute the `createAuthor` mutation to create a new author named "DHANUSH N".
 
 ```graphql
 mutation CreateAuthor {
